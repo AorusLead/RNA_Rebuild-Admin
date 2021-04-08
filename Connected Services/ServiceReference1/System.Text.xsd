@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.Text" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Text" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Globalization" />
+  <xs:complexType name="Encoding">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Globalization" name="dataItem" nillable="true" type="q1:CodePageDataItem" />
+      <xs:element minOccurs="0" name="decoderFallback" nillable="true" type="tns:DecoderFallback" />
+      <xs:element minOccurs="0" name="encoderFallback" nillable="true" type="tns:EncoderFallback" />
+      <xs:element name="m_codePage" type="xs:int" />
+      <xs:element minOccurs="0" name="m_isReadOnly" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Encoding" nillable="true" type="tns:Encoding" />
+  <xs:complexType name="DecoderFallback">
+    <xs:sequence>
+      <xs:element name="bIsMicrosoftBestFitFallback" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DecoderFallback" nillable="true" type="tns:DecoderFallback" />
+  <xs:complexType name="EncoderFallback">
+    <xs:sequence>
+      <xs:element name="bIsMicrosoftBestFitFallback" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EncoderFallback" nillable="true" type="tns:EncoderFallback" />
+</xs:schema>

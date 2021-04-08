@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.Diagnostics" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Diagnostics" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.ComponentModel" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Security" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Text" />
+  <xs:complexType name="ArrayOfProcess">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Process" nillable="true" type="tns:Process" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProcess" nillable="true" type="tns:ArrayOfProcess" />
+  <xs:complexType name="Process">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.ComponentModel" base="q1:Component">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EnableRaisingEvents" type="xs:boolean" />
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="MaxWorkingSet" type="q2:IntPtr" />
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="MinWorkingSet" type="q3:IntPtr" />
+          <xs:element minOccurs="0" name="PriorityBoostEnabled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="PriorityClass" type="tns:ProcessPriorityClass" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="ProcessorAffinity" type="q4:IntPtr" />
+          <xs:element minOccurs="0" name="StartInfo" nillable="true" type="tns:ProcessStartInfo" />
+          <xs:element minOccurs="0" name="SynchronizingObject" nillable="true" type="xs:anyType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Process" nillable="true" type="tns:Process" />
+  <xs:simpleType name="ProcessPriorityClass">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Idle">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">64</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="High">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">128</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RealTime">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">256</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BelowNormal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16384</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AboveNormal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32768</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProcessPriorityClass" nillable="true" type="tns:ProcessPriorityClass" />
+  <xs:complexType name="ProcessStartInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Arguments" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateNoWindow" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Domain" nillable="true" type="xs:string" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Environment" nillable="true" type="q5:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ErrorDialog" type="xs:boolean" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="ErrorDialogParentHandle" type="q6:IntPtr" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LoadUserProfile" type="xs:boolean" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/System.Security" minOccurs="0" name="Password" nillable="true" type="q7:SecureString" />
+      <xs:element minOccurs="0" name="PasswordInClearText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RedirectStandardError" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RedirectStandardInput" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RedirectStandardOutput" type="xs:boolean" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/System.Text" minOccurs="0" name="StandardErrorEncoding" nillable="true" type="q8:Encoding" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System.Text" minOccurs="0" name="StandardOutputEncoding" nillable="true" type="q9:Encoding" />
+      <xs:element minOccurs="0" name="UseShellExecute" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Verb" nillable="true" type="xs:string" />
+      <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Verbs" nillable="true" type="q10:ArrayOfstring" />
+      <xs:element minOccurs="0" name="WindowStyle" type="tns:ProcessWindowStyle" />
+      <xs:element minOccurs="0" name="WorkingDirectory" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProcessStartInfo" nillable="true" type="tns:ProcessStartInfo" />
+  <xs:simpleType name="ProcessWindowStyle">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="Hidden" />
+      <xs:enumeration value="Minimized" />
+      <xs:enumeration value="Maximized" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProcessWindowStyle" nillable="true" type="tns:ProcessWindowStyle" />
+</xs:schema>

@@ -1,0 +1,84 @@
+﻿<Window x:Class="RNA_Rebuild_Admin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RNA_Rebuild_Admin"
+        mc:Ignorable="d"
+        Title="RNA" Height="473" Width="800" Icon="icon.jpg" MinHeight="450" MinWidth="800" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="222*" MinWidth="120"/>
+            <ColumnDefinition Width="565*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="ClientsPCListBox" Margin="0,51,2,22" SelectionChanged="ClientsPCListBox_SelectionChanged">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Shutdown" Click="ShutDownClientPC">
+                        <MenuItem.ToolTip>Turns off clients PC</MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="Disconnect" Click="DisconnectClientPC">
+                        <MenuItem.ToolTip>Turns off clients programm</MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="Reboot" Click="RebootClientPC">
+                        <MenuItem.ToolTip>Rebootы clients PC</MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="File browser" Click="OpenFileBrowser">
+                        <MenuItem.ToolTip>Opens clients PC file browser</MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="Process handler" Click="OpenProcesses">
+                        <MenuItem.ToolTip>Opens clients PC</MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="Open stream" Click="Streaming_Start">
+                        <MenuItem.ToolTip>Opens client PC screen stream</MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="Get screen" Click="MenuItem_Click">
+                        <MenuItem.ToolTip>Shows client PC screenshot</MenuItem.ToolTip>
+                    </MenuItem>
+                    <MenuItem Header="Send message">
+                        <MenuItem.ToolTip>Sends message in MessageBox to clients PC</MenuItem.ToolTip>
+                    </MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
+        <Label Content="Active PCs" HorizontalAlignment="Right" Margin="0,30,38,0" VerticalAlignment="Top" Height="26" Width="64"/>
+
+        <CheckBox Content="All" HorizontalAlignment="Right" Margin="0,36,2,0" VerticalAlignment="Top" Height="15" Width="36" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="5,25,-1,22" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid>
+                <TreeView x:Name="FileBrowser" Visibility="Collapsed">
+                    <TreeView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Delete File"></MenuItem>
+                        </ContextMenu>
+                    </TreeView.ContextMenu>
+                </TreeView>
+                <Image x:Name="Screen" Visibility="Collapsed"></Image>
+                <ListBox x:Name="ProcessList" Visibility="Collapsed"></ListBox>
+            </Grid>
+        </Border>
+        <GridSplitter HorizontalAlignment="Left" Margin="0,25,0,22" Width="5" Grid.Column="1"/>
+        <StatusBar Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="421">
+                <MenuItem Header="Startup host" IsCheckable="True"/>
+                <MenuItem Header="Send mail logs" IsCheckable="True"/>
+                <MenuItem Header="Write txt logs" IsCheckable="True"/>
+                <MenuItem Header="Safe mode" IsCheckable="True"/>
+            </Menu>
+        </StatusBar>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="0,0,-1,-1" Width="793" Grid.ColumnSpan="3" Height="23" VerticalAlignment="Bottom">
+            <Grid HorizontalAlignment="Left" Width="791">
+                <Button Content="Shutdown" Margin="5,0,0,0" VerticalAlignment="Bottom" Height="21" HorizontalAlignment="Left" Width="110" Click="Button_Click"/>
+                <Button Content="Reboot" Margin="178,0,0,0" HorizontalAlignment="Left" Width="110" Height="21" VerticalAlignment="Bottom"/>
+                <Button Content="Disconnect" Margin="531,0,0,0" VerticalAlignment="Bottom" Height="21" HorizontalAlignment="Left" Width="110"/>
+                <Button Content="Send message" Margin="353,0,0,0" VerticalAlignment="Bottom" Height="21" HorizontalAlignment="Left" Width="110"/>
+                <Label Name="Active" Content="" Margin="646,-5,0,0" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="145"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>
