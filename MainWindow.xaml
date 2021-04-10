@@ -64,7 +64,7 @@
         <GridSplitter HorizontalAlignment="Left" Margin="0,25,0,22" Width="5" Grid.Column="1"/>
         <StatusBar Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="421">
-                <MenuItem Header="Startup host" IsCheckable="True"/>
+                <MenuItem x:Name="startupitem" Header="Startup host" IsCheckable="True" Click="MenuItem_Click_1"/>
                 <MenuItem Header="Send mail logs" IsCheckable="True"/>
                 <MenuItem Header="Write txt logs" IsCheckable="True"/>
                 <MenuItem Header="Safe mode" IsCheckable="True"/>

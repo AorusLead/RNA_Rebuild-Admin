@@ -218,9 +218,6 @@
   <wsdl:message name="IService1_GetDrives_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GetDrivesResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetDrives_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:Exception" />
-  </wsdl:message>
   <wsdl:message name="IService1_GetFiles_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GetFiles" />
   </wsdl:message>
@@ -376,7 +373,6 @@
     <wsdl:operation name="GetDrives">
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDrives" message="tns:IService1_GetDrives_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDrivesResponse" message="tns:IService1_GetDrives_InputCallbackMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IService1/GetDrivesExceptionFault" name="ExceptionFault" message="tns:IService1_GetDrives_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetFiles">
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetFiles" message="tns:IService1_GetFiles_OutputCallbackMessage" />
@@ -669,9 +665,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetFiles">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetFiles" style="document" />
