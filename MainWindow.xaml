@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RNA_Rebuild_Admin"
         mc:Ignorable="d"
-        Title="RNA" Height="473" Width="800" Icon="icon.jpg" MinHeight="450" MinWidth="800" Closing="Window_Closing">
+        Title="RNA" Height="473" Width="800" Icon="icon.jpg" MinHeight="450" MinWidth="800" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -58,16 +58,16 @@
                     </TreeView.ContextMenu>
                 </TreeView>
                 <Image x:Name="Screen" Visibility="Collapsed"></Image>
-                <ListBox x:Name="ProcessList" Visibility="Collapsed"></ListBox>
+                <DataGrid x:Name="ProcessList" Visibility="Collapsed"></DataGrid>
             </Grid>
         </Border>
         <GridSplitter HorizontalAlignment="Left" Margin="0,25,0,22" Width="5" Grid.Column="1"/>
         <StatusBar Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="421">
                 <MenuItem x:Name="startupitem" Header="Startup host" IsCheckable="True" Click="MenuItem_Click_1"/>
-                <MenuItem Header="Send mail logs" IsCheckable="True"/>
-                <MenuItem Header="Write txt logs" IsCheckable="True"/>
-                <MenuItem Header="Safe mode" IsCheckable="True"/>
+                <MenuItem x:Name="sendmaillogsitem" Header="Send mail logs" IsCheckable="True" Click="sendmaillogsitem_Click"/>
+                <MenuItem x:Name="textlogsitem" Header="Write txt logs" IsCheckable="True" Click="MenuItem_Click_3"/>
+                <MenuItem x:Name="safemodeitem" Header="Safe mode" IsCheckable="True" Click="MenuItem_Click_2"/>
             </Menu>
         </StatusBar>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="0,0,-1,-1" Width="793" Grid.ColumnSpan="3" Height="23" VerticalAlignment="Bottom">

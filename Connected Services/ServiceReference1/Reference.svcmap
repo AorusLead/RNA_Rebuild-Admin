@@ -29,13 +29,7 @@
     <MetadataFile FileName="System.Net.Sockets.xsd" MetadataType="Schema" ID="2680f62d-8c40-4d81-b225-bb7c125c1f93" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="a2d116ae-9810-4288-b9a6-bf8e1eff1f31" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
     <MetadataFile FileName="RNA_Rebuild.xsd" MetadataType="Schema" ID="36961203-f53c-4179-ada3-b95995576daa" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
-    <MetadataFile FileName="System.xsd" MetadataType="Schema" ID="3afedf32-d5f9-4f5b-817f-d4e657dbf867" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
-    <MetadataFile FileName="System.IO.xsd" MetadataType="Schema" ID="3ecb2713-094c-413a-acba-d385d2a9b008" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
-    <MetadataFile FileName="System.Diagnostics.xsd" MetadataType="Schema" ID="cd311360-5ccc-42f7-94fe-e310826295a8" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
-    <MetadataFile FileName="System.ComponentModel.xsd" MetadataType="Schema" ID="c4cbe438-733a-45da-b52e-66f73728474d" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
-    <MetadataFile FileName="System.Security.xsd" MetadataType="Schema" ID="4b07032e-eba3-4cdd-a3ed-4bccec934140" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
-    <MetadataFile FileName="System.Text.xsd" MetadataType="Schema" ID="4ab37a1e-eade-4280-8109-66ec81d3d654" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
-    <MetadataFile FileName="System.Globalization.xsd" MetadataType="Schema" ID="6b64cad9-84e0-43b2-a2a7-8970462d9301" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
+    <MetadataFile FileName="System.Drawing.xsd" MetadataType="Schema" ID="90e949a3-05c4-44df-9be5-b2056dc73013" SourceId="1" SourceUrl="net.tcp://localhost:8523/Service/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -122,7 +122,13 @@
     <None Include="Connected Services\ServiceReference1\RNA_Rebuild_Admin.ServiceReference1.Client.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceReference1\RNA_Rebuild_Admin.ServiceReference1.SuperFile.datasource">
+    <None Include="Connected Services\ServiceReference1\RNA_Rebuild_Admin.ServiceReference1.SuperFileDirectoryInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\RNA_Rebuild_Admin.ServiceReference1.SuperImage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceReference1\RNA_Rebuild_Admin.ServiceReference1.SuperProcess.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ServiceReference1\service.wsdl" />
@@ -132,31 +138,13 @@
     <None Include="Connected Services\ServiceReference1\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceReference1\System.ComponentModel.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\System.Diagnostics.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\System.Globalization.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\System.IO.xsd">
+    <None Include="Connected Services\ServiceReference1\System.Drawing.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReference1\System.Net.Sockets.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ServiceReference1\System.Net.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\System.Security.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\System.Text.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\System.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\System.Diagnostics.Process.datasource" />

@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Net" />
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/RNA_Rebuild" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.IO" />
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Diagnostics" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/RNA_Rebuild" />
   <xs:element name="AddClient">
     <xs:complexType>
       <xs:sequence>
@@ -45,20 +43,6 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetScreenShot">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="client" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetScreenShotResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetScreenShotResult" nillable="true" type="q3:SuperFile" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="DisconnectClient">
     <xs:complexType>
       <xs:sequence>
@@ -86,7 +70,7 @@
   <xs:element name="SetActiveClients">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Clients" nillable="true" type="q4:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Clients" nillable="true" type="q3:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -103,7 +87,7 @@
   <xs:element name="GetClientsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetClientsResult" nillable="true" type="q5:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetClientsResult" nillable="true" type="q4:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -115,7 +99,7 @@
   <xs:element name="GetActiveClientsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetActiveClientsResult" nillable="true" type="q6:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetActiveClientsResult" nillable="true" type="q5:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -129,7 +113,7 @@
   <xs:element name="GetClientResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetClientResult" nillable="true" type="q7:Client" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetClientResult" nillable="true" type="q6:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -155,6 +139,20 @@
   <xs:element name="DeleteUsingClientResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetScreenShot">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="client" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetScreenShotResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetScreenShotResult" nillable="true" type="q7:SuperImage" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SetSMTPClient">
@@ -198,30 +196,6 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="ShutdownPCs">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="Client" nillable="true" type="q8:Client" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ShutdownPCsResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RebootPCs">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="Client" nillable="true" type="q9:Client" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RebootPCsResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="CheckMail">
     <xs:complexType>
       <xs:sequence />
@@ -234,24 +208,60 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ShutdownPCs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PC_Name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShutdownPCsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RebootPCs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PC_Name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RebootPCsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisconnectPCs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PC_Name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisconnectPCsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetClientDrives">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="client" nillable="true" type="q10:Client" />
+        <xs:element minOccurs="0" name="PC_Name" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetClientDrivesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetClientDrivesResult" nillable="true" type="q11:ArrayOfstring" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetClientDrivesResult" nillable="true" type="q8:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetClientDirectories">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="client" nillable="true" type="q12:Client" />
+        <xs:element minOccurs="0" name="PC_Name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="path" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -259,14 +269,14 @@
   <xs:element name="GetClientDirectoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetClientDirectoriesResult" nillable="true" type="q13:ArrayOfDirectoryInfo" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetClientDirectoriesResult" nillable="true" type="q9:ArrayOfSuperFileDirectoryInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetClientFiles">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="client" nillable="true" type="q14:Client" />
+        <xs:element minOccurs="0" name="PC_Name" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="path" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -274,22 +284,35 @@
   <xs:element name="GetClientFilesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetClientFilesResult" nillable="true" type="q15:ArrayOfFileInfo" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetClientFilesResult" nillable="true" type="q10:ArrayOfSuperFileDirectoryInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetClientProcesses">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="client" nillable="true" type="q16:Client" />
+        <xs:element minOccurs="0" name="client" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetClientProcessesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/System.Diagnostics" minOccurs="0" name="GetClientProcessesResult" nillable="true" type="q17:ArrayOfProcess" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetClientProcessesResult" nillable="true" type="q11:ArrayOfSuperProcess" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseClientProcess">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PC_Name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProcessId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseClientProcessResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="GetScreenshot">
@@ -300,7 +323,7 @@
   <xs:element name="GetScreenshotResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetScreenshotResult" nillable="true" type="q18:SuperFile" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetScreenshotResult" nillable="true" type="q12:SuperImage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -334,7 +357,7 @@
   <xs:element name="GetProcessesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/System.Diagnostics" minOccurs="0" name="GetProcessesResult" nillable="true" type="q19:ArrayOfProcess" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetProcessesResult" nillable="true" type="q13:ArrayOfSuperProcess" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -353,7 +376,7 @@
   <xs:element name="GetDrivesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetDrivesResult" nillable="true" type="q20:ArrayOfstring" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetDrivesResult" nillable="true" type="q14:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -367,7 +390,7 @@
   <xs:element name="GetFilesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetFilesResult" nillable="true" type="q21:ArrayOfFileInfo" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetFilesResult" nillable="true" type="q15:ArrayOfSuperFileDirectoryInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -381,7 +404,7 @@
   <xs:element name="GetDirectoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetDirectoriesResult" nillable="true" type="q22:ArrayOfDirectoryInfo" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetDirectoriesResult" nillable="true" type="q16:ArrayOfSuperFileDirectoryInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -389,13 +412,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="path" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RemoveFileResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="RemoveFileResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -409,7 +425,7 @@
   <xs:element name="FindFilesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FindFilesResult" nillable="true" type="q23:ArrayOfstring" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FindFilesResult" nillable="true" type="q17:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -423,29 +439,41 @@
   <xs:element name="TakeFileResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="TakeFileResult" nillable="true" type="q24:SuperFile" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="Add_Client">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="cl" nillable="true" type="q25:Client" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="Remove_Client">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="cl" nillable="true" type="q26:Client" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="TakeFileResult" nillable="true" type="q18:SuperFile" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateClients">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="UsingClients" nillable="true" type="q27:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
-        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Clients" nillable="true" type="q28:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="UsingClients" nillable="true" type="q19:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Clients" nillable="true" type="q20:ArrayOfKeyValueOfstringClient0fKV_PLH7" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Add_Client">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="cl" nillable="true" type="q21:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Remove_Client">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="cl" nillable="true" type="q22:Client" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ping">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PingResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

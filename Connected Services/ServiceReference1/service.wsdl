@@ -41,13 +41,7 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Net.Sockets" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/RNA_Rebuild" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.IO" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Diagnostics" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.ComponentModel" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Security" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Text" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Globalization" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Drawing" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService1_AddClient_InputMessage">
@@ -67,12 +61,6 @@
   </wsdl:message>
   <wsdl:message name="IService1_DeleteAdmin_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteAdminResponse" />
-  </wsdl:message>
-  <wsdl:message name="IService1_GetScreenShot_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetScreenShot" />
-  </wsdl:message>
-  <wsdl:message name="IService1_GetScreenShot_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetScreenShotResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_DisconnectClient_InputMessage">
     <wsdl:part name="parameters" element="tns:DisconnectClient" />
@@ -122,6 +110,12 @@
   <wsdl:message name="IService1_DeleteUsingClient_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUsingClientResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetScreenShot_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScreenShot" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetScreenShot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScreenShotResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_SetSMTPClient_InputMessage">
     <wsdl:part name="parameters" element="tns:SetSMTPClient" />
   </wsdl:message>
@@ -140,6 +134,12 @@
   <wsdl:message name="IService1_ChangeTXTLogging_OutputMessage">
     <wsdl:part name="parameters" element="tns:ChangeTXTLoggingResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_CheckMail_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckMail" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CheckMail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckMailResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_ShutdownPCs_InputMessage">
     <wsdl:part name="parameters" element="tns:ShutdownPCs" />
   </wsdl:message>
@@ -152,20 +152,17 @@
   <wsdl:message name="IService1_RebootPCs_OutputMessage">
     <wsdl:part name="parameters" element="tns:RebootPCsResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_CheckMail_InputMessage">
-    <wsdl:part name="parameters" element="tns:CheckMail" />
+  <wsdl:message name="IService1_DisconnectPCs_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectPCs" />
   </wsdl:message>
-  <wsdl:message name="IService1_CheckMail_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CheckMailResponse" />
+  <wsdl:message name="IService1_DisconnectPCs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectPCsResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetClientDrives_InputMessage">
     <wsdl:part name="parameters" element="tns:GetClientDrives" />
   </wsdl:message>
   <wsdl:message name="IService1_GetClientDrives_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetClientDrivesResponse" />
-  </wsdl:message>
-  <wsdl:message name="IService1_GetClientDrives_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:Exception" />
   </wsdl:message>
   <wsdl:message name="IService1_GetClientDirectories_InputMessage">
     <wsdl:part name="parameters" element="tns:GetClientDirectories" />
@@ -184,6 +181,12 @@
   </wsdl:message>
   <wsdl:message name="IService1_GetClientProcesses_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetClientProcessesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CloseClientProcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:CloseClientProcess" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CloseClientProcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CloseClientProcessResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetScreenshot_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GetScreenshot" />
@@ -233,9 +236,6 @@
   <wsdl:message name="IService1_RemoveFile_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RemoveFile" />
   </wsdl:message>
-  <wsdl:message name="IService1_RemoveFile_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:RemoveFileResponse" />
-  </wsdl:message>
   <wsdl:message name="IService1_FindFiles_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:FindFiles" />
   </wsdl:message>
@@ -248,14 +248,20 @@
   <wsdl:message name="IService1_TakeFile_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:TakeFileResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_UpdateClients_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateClients" />
+  </wsdl:message>
   <wsdl:message name="IService1_Add_Client_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Add_Client" />
   </wsdl:message>
   <wsdl:message name="IService1_Remove_Client_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:Remove_Client" />
   </wsdl:message>
-  <wsdl:message name="IService1_UpdateClients_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:UpdateClients" />
+  <wsdl:message name="IService1_Ping_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Ping_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
   </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="AddClient">
@@ -269,10 +275,6 @@
     <wsdl:operation name="DeleteAdmin">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteAdmin" message="tns:IService1_DeleteAdmin_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteAdminResponse" message="tns:IService1_DeleteAdmin_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetScreenShot">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetScreenShot" message="tns:IService1_GetScreenShot_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetScreenShotResponse" message="tns:IService1_GetScreenShot_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DisconnectClient">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisconnectClient" message="tns:IService1_DisconnectClient_InputMessage" />
@@ -306,6 +308,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteUsingClient" message="tns:IService1_DeleteUsingClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteUsingClientResponse" message="tns:IService1_DeleteUsingClient_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetScreenShot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetScreenShot" message="tns:IService1_GetScreenShot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetScreenShotResponse" message="tns:IService1_GetScreenShot_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SetSMTPClient">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SetSMTPClient" message="tns:IService1_SetSMTPClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SetSMTPClientResponse" message="tns:IService1_SetSMTPClient_OutputMessage" />
@@ -318,6 +324,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ChangeTXTLogging" message="tns:IService1_ChangeTXTLogging_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ChangeTXTLoggingResponse" message="tns:IService1_ChangeTXTLogging_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CheckMail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckMail" message="tns:IService1_CheckMail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckMailResponse" message="tns:IService1_CheckMail_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ShutdownPCs">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/ShutdownPCs" message="tns:IService1_ShutdownPCs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/ShutdownPCsResponse" message="tns:IService1_ShutdownPCs_OutputMessage" />
@@ -326,14 +336,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/RebootPCs" message="tns:IService1_RebootPCs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/RebootPCsResponse" message="tns:IService1_RebootPCs_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CheckMail">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckMail" message="tns:IService1_CheckMail_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckMailResponse" message="tns:IService1_CheckMail_OutputMessage" />
+    <wsdl:operation name="DisconnectPCs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisconnectPCs" message="tns:IService1_DisconnectPCs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DisconnectPCsResponse" message="tns:IService1_DisconnectPCs_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetClientDrives">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetClientDrives" message="tns:IService1_GetClientDrives_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetClientDrivesResponse" message="tns:IService1_GetClientDrives_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IService1/GetClientDrivesExceptionFault" name="ExceptionFault" message="tns:IService1_GetClientDrives_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetClientDirectories">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetClientDirectories" message="tns:IService1_GetClientDirectories_InputMessage" />
@@ -346,6 +355,10 @@
     <wsdl:operation name="GetClientProcesses">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetClientProcesses" message="tns:IService1_GetClientProcesses_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetClientProcessesResponse" message="tns:IService1_GetClientProcesses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseClientProcess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CloseClientProcess" message="tns:IService1_CloseClientProcess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CloseClientProcessResponse" message="tns:IService1_CloseClientProcess_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetScreenshot">
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetScreenshot" message="tns:IService1_GetScreenshot_OutputCallbackMessage" />
@@ -384,7 +397,6 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveFile">
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/RemoveFile" message="tns:IService1_RemoveFile_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/RemoveFileResponse" message="tns:IService1_RemoveFile_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindFiles">
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/FindFiles" message="tns:IService1_FindFiles_OutputCallbackMessage" />
@@ -394,14 +406,18 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/TakeFile" message="tns:IService1_TakeFile_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/TakeFileResponse" message="tns:IService1_TakeFile_InputCallbackMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateClients">
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateClients" message="tns:IService1_UpdateClients_OutputCallbackMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Add_Client">
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/Add_Client" message="tns:IService1_Add_Client_OutputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="Remove_Client">
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/Remove_Client" message="tns:IService1_Remove_Client_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="UpdateClients">
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/UpdateClients" message="tns:IService1_UpdateClients_OutputCallbackMessage" />
+    <wsdl:operation name="Ping">
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/Ping" message="tns:IService1_Ping_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/PingResponse" message="tns:IService1_Ping_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IService1" type="tns:IService1">
@@ -428,15 +444,6 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteAdmin">
       <soap12:operation soapAction="http://tempuri.org/IService1/DeleteAdmin" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetScreenShot">
-      <soap12:operation soapAction="http://tempuri.org/IService1/GetScreenShot" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -516,6 +523,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetScreenShot">
+      <soap12:operation soapAction="http://tempuri.org/IService1/GetScreenShot" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SetSMTPClient">
       <soap12:operation soapAction="http://tempuri.org/IService1/SetSMTPClient" style="document" />
       <wsdl:input>
@@ -543,6 +559,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CheckMail">
+      <soap12:operation soapAction="http://tempuri.org/IService1/CheckMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ShutdownPCs">
       <soap12:operation soapAction="http://tempuri.org/IService1/ShutdownPCs" style="document" />
       <wsdl:input>
@@ -561,8 +586,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CheckMail">
-      <soap12:operation soapAction="http://tempuri.org/IService1/CheckMail" style="document" />
+    <wsdl:operation name="DisconnectPCs">
+      <soap12:operation soapAction="http://tempuri.org/IService1/DisconnectPCs" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -578,9 +603,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetClientDirectories">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetClientDirectories" style="document" />
@@ -602,6 +624,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetClientProcesses">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetClientProcesses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseClientProcess">
+      <soap12:operation soapAction="http://tempuri.org/IService1/CloseClientProcess" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -686,9 +717,6 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveFile">
       <soap12:operation soapAction="http://tempuri.org/IService1/RemoveFile" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -711,6 +739,12 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateClients">
+      <soap12:operation soapAction="http://tempuri.org/IService1/UpdateClients" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Add_Client">
       <soap12:operation soapAction="http://tempuri.org/IService1/Add_Client" style="document" />
       <wsdl:output>
@@ -723,8 +757,11 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="UpdateClients">
-      <soap12:operation soapAction="http://tempuri.org/IService1/UpdateClients" style="document" />
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IService1/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
