@@ -73,10 +73,16 @@ namespace RNA_Rebuild_Admin
 
 				if (error.Length > 35) { MessageBox.Show(error); return; }
 
-				OnSenderAdd?.Invoke(TB_server.Text, Convert.ToInt32(TB_port.Text), TB_mail.Text, passbox.Password, (bool)SSL.IsChecked, TB_reciever.Text);
-				this.Close();
+				if (OnSenderAdd.Invoke(TB_server.Text, Convert.ToInt32(TB_port.Text), TB_mail.Text, passbox.Password, (bool)SSL.IsChecked, TB_reciever.Text))
+					this.Close();
+				else MessageBox.Show("Something went wrong.");
 			}
 			catch (Exception ex) { MessageBox.Show(ex.Message); return; }
+		}
+
+		private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

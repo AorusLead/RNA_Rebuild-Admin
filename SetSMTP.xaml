@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:RNA_Rebuild_Admin"
         mc:Ignorable="d"
         
-        Title="Add Sender" Height="318.5" Width="293.5" ResizeMode="NoResize">
+        Title="Add Sender" Height="323.833" Width="296.167" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="mail" TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
             <Style.Resources>
@@ -79,35 +80,35 @@
 
     </Window.Resources>
     <Grid>
-        <Label Content="Mail Address" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
+        <Label Content="Mail Address" HorizontalAlignment="Left" Margin="7,6,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TB_mail" HorizontalAlignment="Left" Height="20" Margin="10,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266" Style="{StaticResource ResourceKey=mail}">
             <TextBox.ToolTip>
                 <ToolTip Content="Email account address"/>
             </TextBox.ToolTip>
         </TextBox>
 
-        <Label Content="SMTP server address" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top"/>
+        <Label Content="SMTP server address" HorizontalAlignment="Left" Margin="7,97,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TB_server" HorizontalAlignment="Left" Height="23" Margin="10,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266" Style="{StaticResource ResourceKey=smtp}">
             <TextBox.ToolTip>
                 <ToolTip Content="SMTP server address"/>
             </TextBox.ToolTip>
         </TextBox>
 
-        <Label Content="SMTP Port" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
+        <Label Content="SMTP Port" HorizontalAlignment="Left" Margin="7,146,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TB_port" HorizontalAlignment="Left" Height="23" Margin="10,172,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266"  PreviewTextInput="NumberValidationTextBox" Style="{StaticResource ResourceKey=port}">
             <TextBox.ToolTip>
                 <ToolTip Content="SMTP server port"/>
             </TextBox.ToolTip>
         </TextBox>
 
-        <Label Content="Mail Password" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TB_pass" HorizontalAlignment="Left" Height="18" Margin="10,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266" Visibility="Collapsed" IsEnabled="False"/>
-        <PasswordBox x:Name="passbox" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="266" Visibility="Visible" PasswordChanged="PasswordBox_PasswordChanged"/>
+        <Label Content="Mail Password" HorizontalAlignment="Left" Margin="7,52,0,0" VerticalAlignment="Top"/>
+        <TextBox Visibility="Collapsed" materialDesign:HintAssist.Hint="Password" x:Name="TB_pass" HorizontalAlignment="Left" Height="34" Margin="10,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266" IsEnabled="False"/>
+        <PasswordBox Visibility="Visible" x:Name="passbox" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="266" PasswordChanged="PasswordBox_PasswordChanged"/>
 
-        <CheckBox Content="Show password" HorizontalAlignment="Left" Margin="10,241,0,0" VerticalAlignment="Top" Height="15" Width="105" Checked="CheckBox_Checked"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="180,240,0,0" VerticalAlignment="Top" Width="96" Height="36" Click="Add_Click"/>
-        <CheckBox x:Name="SSL" Content="SSL" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top"/>
-        <Label Content="Reciever Mail Address" HorizontalAlignment="Left" Margin="10,194,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Show password" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Height="20" Width="105" Click="CheckBox_Checked"/>
+        <Button  Background="LimeGreen" BorderBrush="ForestGreen" Content="Save" HorizontalAlignment="Left" Margin="180,247,0,0" VerticalAlignment="Top" Width="96" Height="36" Click="Add_Click"/>
+        <CheckBox IsChecked="True" x:Name="SSL" Content="SSL" HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top"/>
+        <Label Content="Reciever Mail Address" HorizontalAlignment="Left" Margin="7,194,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TB_reciever" HorizontalAlignment="Left" Height="20" Margin="10,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="266" Style="{StaticResource ResourceKey=mail}">
             <TextBox.ToolTip>
                 <ToolTip Content="Reciever email address"/>

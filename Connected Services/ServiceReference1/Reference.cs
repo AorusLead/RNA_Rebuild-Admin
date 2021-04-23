@@ -23,6 +23,8 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.Dictionary<string, RNA_Rebuild_Admin.ServiceReference1.Client>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(string[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RNA_Rebuild_Admin.ServiceReference1.SuperImage))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RNA_Rebuild_Admin.ServiceReference1.SuperDrive[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RNA_Rebuild_Admin.ServiceReference1.SuperDrive))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RNA_Rebuild_Admin.ServiceReference1.SuperFileDirectoryInfo[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RNA_Rebuild_Admin.ServiceReference1.SuperFileDirectoryInfo))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RNA_Rebuild_Admin.ServiceReference1.SuperProcess[]))]
@@ -166,6 +168,115 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SuperDrive", Namespace="http://schemas.datacontract.org/2004/07/RNA_Rebuild")]
+    [System.SerializableAttribute()]
+    public partial class SuperDrive : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long FreeSpaceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsEmptyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long TotalSpaceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long UsedSpaceField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long FreeSpace {
+            get {
+                return this.FreeSpaceField;
+            }
+            set {
+                if ((this.FreeSpaceField.Equals(value) != true)) {
+                    this.FreeSpaceField = value;
+                    this.RaisePropertyChanged("FreeSpace");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsEmpty {
+            get {
+                return this.IsEmptyField;
+            }
+            set {
+                if ((this.IsEmptyField.Equals(value) != true)) {
+                    this.IsEmptyField = value;
+                    this.RaisePropertyChanged("IsEmpty");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long TotalSpace {
+            get {
+                return this.TotalSpaceField;
+            }
+            set {
+                if ((this.TotalSpaceField.Equals(value) != true)) {
+                    this.TotalSpaceField = value;
+                    this.RaisePropertyChanged("TotalSpace");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long UsedSpace {
+            get {
+                return this.UsedSpaceField;
+            }
+            set {
+                if ((this.UsedSpaceField.Equals(value) != true)) {
+                    this.UsedSpaceField = value;
+                    this.RaisePropertyChanged("UsedSpace");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SuperFileDirectoryInfo", Namespace="http://schemas.datacontract.org/2004/07/RNA_Rebuild")]
     [System.SerializableAttribute()]
     public partial class SuperFileDirectoryInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -283,7 +394,7 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Drawing.Bitmap IconField;
+        private byte[] IconField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
@@ -302,7 +413,7 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Drawing.Bitmap Icon {
+        public byte[] Icon {
             get {
                 return this.IconField;
             }
@@ -363,6 +474,9 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
         private byte[] ContentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Drawing.Bitmap IconField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -384,6 +498,19 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
                 if ((object.ReferenceEquals(this.ContentField, value) != true)) {
                     this.ContentField = value;
                     this.RaisePropertyChanged("Content");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Drawing.Bitmap Icon {
+            get {
+                return this.IconField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IconField, value) != true)) {
+                    this.IconField = value;
+                    this.RaisePropertyChanged("Icon");
                 }
             }
         }
@@ -481,6 +608,12 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DeleteUsingClient", ReplyAction="http://tempuri.org/IService1/DeleteUsingClientResponse")]
         System.Threading.Tasks.Task DeleteUsingClientAsync(string PCname);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SendMessageToClients", ReplyAction="http://tempuri.org/IService1/SendMessageToClientsResponse")]
+        void SendMessageToClients(string PcName, string text);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SendMessageToClients", ReplyAction="http://tempuri.org/IService1/SendMessageToClientsResponse")]
+        System.Threading.Tasks.Task SendMessageToClientsAsync(string PcName, string text);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetScreenShot", ReplyAction="http://tempuri.org/IService1/GetScreenShotResponse")]
         RNA_Rebuild_Admin.ServiceReference1.SuperImage GetScreenShot(string client);
         
@@ -523,17 +656,11 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/RebootPCs", ReplyAction="http://tempuri.org/IService1/RebootPCsResponse")]
         System.Threading.Tasks.Task RebootPCsAsync(string PC_Name);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisconnectPCs", ReplyAction="http://tempuri.org/IService1/DisconnectPCsResponse")]
-        void DisconnectPCs(string PC_Name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DisconnectPCs", ReplyAction="http://tempuri.org/IService1/DisconnectPCsResponse")]
-        System.Threading.Tasks.Task DisconnectPCsAsync(string PC_Name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetClientDrives", ReplyAction="http://tempuri.org/IService1/GetClientDrivesResponse")]
+        RNA_Rebuild_Admin.ServiceReference1.SuperDrive[] GetClientDrives(string PC_Name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetClientDrives", ReplyAction="http://tempuri.org/IService1/GetClientDrivesResponse")]
-        string[] GetClientDrives(string PC_Name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetClientDrives", ReplyAction="http://tempuri.org/IService1/GetClientDrivesResponse")]
-        System.Threading.Tasks.Task<string[]> GetClientDrivesAsync(string PC_Name);
+        System.Threading.Tasks.Task<RNA_Rebuild_Admin.ServiceReference1.SuperDrive[]> GetClientDrivesAsync(string PC_Name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetClientDirectories", ReplyAction="http://tempuri.org/IService1/GetClientDirectoriesResponse")]
         RNA_Rebuild_Admin.ServiceReference1.SuperFileDirectoryInfo[] GetClientDirectories(string PC_Name, string path);
@@ -585,7 +712,7 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
         void CloseProcess(int ProcessId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDrives", ReplyAction="http://tempuri.org/IService1/GetDrivesResponse")]
-        string[] GetDrives();
+        RNA_Rebuild_Admin.ServiceReference1.SuperDrive[] GetDrives();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFiles", ReplyAction="http://tempuri.org/IService1/GetFilesResponse")]
         RNA_Rebuild_Admin.ServiceReference1.SuperFileDirectoryInfo[] GetFiles(string path);
@@ -731,6 +858,14 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
             return base.Channel.DeleteUsingClientAsync(PCname);
         }
         
+        public void SendMessageToClients(string PcName, string text) {
+            base.Channel.SendMessageToClients(PcName, text);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageToClientsAsync(string PcName, string text) {
+            return base.Channel.SendMessageToClientsAsync(PcName, text);
+        }
+        
         public RNA_Rebuild_Admin.ServiceReference1.SuperImage GetScreenShot(string client) {
             return base.Channel.GetScreenShot(client);
         }
@@ -787,19 +922,11 @@ namespace RNA_Rebuild_Admin.ServiceReference1 {
             return base.Channel.RebootPCsAsync(PC_Name);
         }
         
-        public void DisconnectPCs(string PC_Name) {
-            base.Channel.DisconnectPCs(PC_Name);
-        }
-        
-        public System.Threading.Tasks.Task DisconnectPCsAsync(string PC_Name) {
-            return base.Channel.DisconnectPCsAsync(PC_Name);
-        }
-        
-        public string[] GetClientDrives(string PC_Name) {
+        public RNA_Rebuild_Admin.ServiceReference1.SuperDrive[] GetClientDrives(string PC_Name) {
             return base.Channel.GetClientDrives(PC_Name);
         }
         
-        public System.Threading.Tasks.Task<string[]> GetClientDrivesAsync(string PC_Name) {
+        public System.Threading.Tasks.Task<RNA_Rebuild_Admin.ServiceReference1.SuperDrive[]> GetClientDrivesAsync(string PC_Name) {
             return base.Channel.GetClientDrivesAsync(PC_Name);
         }
         

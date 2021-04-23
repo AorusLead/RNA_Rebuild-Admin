@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:RNA_Rebuild_Admin"
         mc:Ignorable="d"
-        Title="Authorization" Height="173.286" Width="202.477" Closing="Window_Closing">
+        Title="Authorization" Height="172.627" Width="212.922" Closing="Window_Closing" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="Login" TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
             <Style.Resources>
@@ -31,15 +32,13 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Label Content="Login" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="LoginBox" Style="{StaticResource ResourceKey=Login}" HorizontalAlignment="Left" Height="20" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
-
-        <Label Content="Password" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TB_pass" HorizontalAlignment="Left" Height="18" Margin="10,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Visibility="Collapsed" IsEnabled="False"/>
-        <PasswordBox x:Name="passbox" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Width="176" Visibility="Visible"/>
-
-        <CheckBox Content="Show password" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="15" Width="105"/>
-        <Button Content="Log-in" HorizontalAlignment="Left" Margin="111,115,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Label Content="Login" HorizontalAlignment="Left" Margin="-4,1,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LoginBox" Style="{StaticResource ResourceKey=Login}" HorizontalAlignment="Left" Height="20" Margin="2,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
+        <TextBox Visibility="Collapsed" materialDesign:HintAssist.Hint="Password" x:Name="TB_pass" HorizontalAlignment="Left" Height="25" Margin="8,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" IsEnabled="False"/>
+        <PasswordBox x:Name="passbox" HorizontalAlignment="Left" Margin="2,66,0,0" VerticalAlignment="Top" Width="182" Visibility="Visible" PasswordChanged="passbox_PasswordChanged" Height="25"/>
+        <CheckBox Content="Show password" HorizontalAlignment="Left" Margin="2,105,0,0" VerticalAlignment="Top" Height="20" Width="105" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <Button Background="LimeGreen" BorderBrush="ForestGreen" Content="Log-in" HorizontalAlignment="Left" Margin="112,96,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Height="29"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="-4,48,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

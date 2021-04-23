@@ -27,13 +27,30 @@ namespace RNA_Rebuild_Admin
 		private bool flag = false;
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			if (OnLoginning.Invoke(LoginBox.Text, passbox.Password)) { flag = true; this.Close(); }
+			if (OnLoginning.Invoke(LoginBox.Text, TB_pass.Text)) { flag = true; Close(); }
 			else MessageBox.Show("Something went wrong!");
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if (!flag) e.Cancel = true;
+		}
+
+		private void CheckBox_Checked(object sender, RoutedEventArgs e)
+		{
+			passbox.Visibility = Visibility.Collapsed;
+			TB_pass.Visibility = Visibility.Visible;
+		}
+
+		private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+		{
+			passbox.Visibility = Visibility.Visible;
+			TB_pass.Visibility = Visibility.Collapsed;
+		}
+
+		private void passbox_PasswordChanged(object sender, RoutedEventArgs e)
+		{
+			TB_pass.Text = ((PasswordBox)sender).Password;
 		}
 	}
 }

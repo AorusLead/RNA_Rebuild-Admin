@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:RNA_Rebuild_Admin"
         mc:Ignorable="d"
-        Title="RNA" Height="473" Width="800" Icon="icon.jpg" MinHeight="450" MinWidth="800" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="RNA" Height="483.333" Width="800" Icon="icon.jpg" MinHeight="450" MinWidth="800" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -15,7 +16,7 @@
             <ColumnDefinition Width="565*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="ClientsPCListBox" Margin="0,51,2,22" SelectionChanged="ClientsPCListBox_SelectionChanged">
+        <ListBox x:Name="ClientsPCListBox" Margin="0,51,2,27" SelectionChanged="ClientsPCListBox_SelectionChanged">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Shutdown" Click="ShutDownClientPC">
@@ -39,7 +40,7 @@
                     <MenuItem Header="Get screen" Click="MenuItem_Click">
                         <MenuItem.ToolTip>Shows client PC screenshot</MenuItem.ToolTip>
                     </MenuItem>
-                    <MenuItem Header="Send message">
+                    <MenuItem Header="Send message" Click="MenuItem_Click_4">
                         <MenuItem.ToolTip>Sends message in MessageBox to clients PC</MenuItem.ToolTip>
                     </MenuItem>
                 </ContextMenu>
@@ -47,8 +48,8 @@
         </ListBox>
         <Label Content="Active PCs" HorizontalAlignment="Right" Margin="0,30,38,0" VerticalAlignment="Top" Height="26" Width="64"/>
 
-        <CheckBox Content="All" HorizontalAlignment="Right" Margin="0,36,2,0" VerticalAlignment="Top" Height="15" Width="36" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="5,25,-1,22" Grid.Column="1" Grid.ColumnSpan="2">
+        <CheckBox x:Name="SelectAllCheckBox" Content="All" HorizontalAlignment="Right" Margin="0,30,2,0" VerticalAlignment="Top" Height="21" Width="36" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="5,25,-1,27" Grid.Column="1" Grid.ColumnSpan="2">
             <Grid>
                 <TreeView x:Name="FileBrowser" Visibility="Collapsed">
                     <TreeView.ContextMenu>
@@ -57,28 +58,45 @@
                         </ContextMenu>
                     </TreeView.ContextMenu>
                 </TreeView>
-                <Image x:Name="Screen" Visibility="Collapsed"></Image>
-                <DataGrid x:Name="ProcessList" Visibility="Collapsed"></DataGrid>
+                <Image x:Name="Screen" Visibility="Collapsed" Stretch="UniformToFill"></Image>
+                <DataGrid x:Name="ProcessList" Visibility="Collapsed" SelectionChanged="ProcessList_SelectionChanged" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True" CanUserResizeColumns="True"  CanUserSortColumns="True" PreviewMouseDown="ProcessList_PreviewMouseDown" PreviewMouseWheel="ProcessList_PreviewMouseWheel" PreviewMouseUp="ProcessList_PreviewMouseUp">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Icon">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Height="50" Width="50" Source="{Binding Icon}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="50"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" IsReadOnly="True" Width="90"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Close Process" Click="MenuItem_Click_5"></MenuItem>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
             </Grid>
         </Border>
-        <GridSplitter HorizontalAlignment="Left" Margin="0,25,0,22" Width="5" Grid.Column="1"/>
-        <StatusBar Height="25" VerticalAlignment="Top" Grid.ColumnSpan="2">
-            <Menu HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="421">
-                <MenuItem x:Name="startupitem" Header="Startup host" IsCheckable="True" Click="MenuItem_Click_1"/>
-                <MenuItem x:Name="sendmaillogsitem" Header="Send mail logs" IsCheckable="True" Click="sendmaillogsitem_Click"/>
-                <MenuItem x:Name="textlogsitem" Header="Write txt logs" IsCheckable="True" Click="MenuItem_Click_3"/>
-                <MenuItem x:Name="safemodeitem" Header="Safe mode" IsCheckable="True" Click="MenuItem_Click_2"/>
-            </Menu>
-        </StatusBar>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="0,0,-1,-1" Width="793" Grid.ColumnSpan="3" Height="23" VerticalAlignment="Bottom">
+        <GridSplitter HorizontalAlignment="Left" Margin="0,25,0,27" Width="5" Grid.Column="1"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,-1,-1" Grid.ColumnSpan="3" Height="28" VerticalAlignment="Bottom">
             <Grid HorizontalAlignment="Left" Width="791">
-                <Button Content="Shutdown" Margin="5,0,0,0" VerticalAlignment="Bottom" Height="21" HorizontalAlignment="Left" Width="110" Click="Button_Click"/>
-                <Button Content="Reboot" Margin="178,0,0,0" HorizontalAlignment="Left" Width="110" Height="21" VerticalAlignment="Bottom"/>
-                <Button Content="Disconnect" Margin="531,0,0,0" VerticalAlignment="Bottom" Height="21" HorizontalAlignment="Left" Width="110"/>
-                <Button Content="Send message" Margin="353,0,0,0" VerticalAlignment="Bottom" Height="21" HorizontalAlignment="Left" Width="110"/>
-                <Label Name="Active" Content="" Margin="646,-5,0,0" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="145"/>
+                <Button Content="Shutdown" Margin="5,0,0,0" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Left" Width="110" Click="Button_Click"/>
+                <Button Content="Reboot" Margin="178,0,0,0" HorizontalAlignment="Left" Width="110" Height="26" VerticalAlignment="Bottom" Click="Button_Click_2"/>
+                <Button Content="Disconnect" Margin="558,0,0,0" VerticalAlignment="Bottom" Height="26" HorizontalAlignment="Left" Width="110" Click="Button_Click_3"/>
+                <Button Content="Send message" Margin="353,0,0,0" VerticalAlignment="Top" Height="26" HorizontalAlignment="Left" Width="129" Click="Button_Click_1"/>
+                <Label Name="Active" Content="" Margin="678,0,0,0" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="113"/>
             </Grid>
         </Border>
 
+        <StatusBar Height="25" VerticalAlignment="Top" Grid.ColumnSpan="3">
+            <Menu HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="797">
+                <MenuItem x:Name="startupitem" Header="Startup host" IsCheckable="True" Click="MenuItem_Click_1" Height="26"/>
+                <MenuItem x:Name="sendmaillogsitem" Header="Send mail logs" IsCheckable="True" Click="sendmaillogsitem_Click" Height="26"/>
+                <MenuItem x:Name="textlogsitem" Header="Write txt logs" IsCheckable="True" Click="MenuItem_Click_3" Height="26"/>
+                <MenuItem x:Name="safemodeitem" Header="Safe mode" IsCheckable="True" Click="MenuItem_Click_2" Height="26"/>
+            </Menu>
+        </StatusBar>
     </Grid>
 </Window>

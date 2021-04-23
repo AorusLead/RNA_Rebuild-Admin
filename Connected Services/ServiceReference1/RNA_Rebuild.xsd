@@ -17,6 +17,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SuperImage" nillable="true" type="tns:SuperImage" />
+  <xs:complexType name="ArrayOfSuperDrive">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SuperDrive" nillable="true" type="tns:SuperDrive" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSuperDrive" nillable="true" type="tns:ArrayOfSuperDrive" />
+  <xs:complexType name="SuperDrive">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FreeSpace" type="xs:long" />
+      <xs:element minOccurs="0" name="IsEmpty" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TotalSpace" type="xs:long" />
+      <xs:element minOccurs="0" name="UsedSpace" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SuperDrive" nillable="true" type="tns:SuperDrive" />
   <xs:complexType name="ArrayOfSuperFileDirectoryInfo">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SuperFileDirectoryInfo" nillable="true" type="tns:SuperFileDirectoryInfo" />
@@ -41,7 +57,7 @@
   <xs:element name="ArrayOfSuperProcess" nillable="true" type="tns:ArrayOfSuperProcess" />
   <xs:complexType name="SuperProcess">
     <xs:sequence>
-      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Drawing" minOccurs="0" name="Icon" nillable="true" type="q3:Bitmap" />
+      <xs:element minOccurs="0" name="Icon" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -50,6 +66,7 @@
   <xs:complexType name="SuperFile">
     <xs:sequence>
       <xs:element minOccurs="0" name="Content" nillable="true" type="xs:base64Binary" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Drawing" minOccurs="0" name="Icon" nillable="true" type="q3:Bitmap" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

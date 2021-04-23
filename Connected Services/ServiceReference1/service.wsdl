@@ -110,6 +110,12 @@
   <wsdl:message name="IService1_DeleteUsingClient_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUsingClientResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SendMessageToClients_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageToClients" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SendMessageToClients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageToClientsResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetScreenShot_InputMessage">
     <wsdl:part name="parameters" element="tns:GetScreenShot" />
   </wsdl:message>
@@ -151,12 +157,6 @@
   </wsdl:message>
   <wsdl:message name="IService1_RebootPCs_OutputMessage">
     <wsdl:part name="parameters" element="tns:RebootPCsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IService1_DisconnectPCs_InputMessage">
-    <wsdl:part name="parameters" element="tns:DisconnectPCs" />
-  </wsdl:message>
-  <wsdl:message name="IService1_DisconnectPCs_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DisconnectPCsResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetClientDrives_InputMessage">
     <wsdl:part name="parameters" element="tns:GetClientDrives" />
@@ -308,6 +308,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/DeleteUsingClient" message="tns:IService1_DeleteUsingClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/DeleteUsingClientResponse" message="tns:IService1_DeleteUsingClient_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SendMessageToClients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendMessageToClients" message="tns:IService1_SendMessageToClients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendMessageToClientsResponse" message="tns:IService1_SendMessageToClients_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetScreenShot">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetScreenShot" message="tns:IService1_GetScreenShot_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetScreenShotResponse" message="tns:IService1_GetScreenShot_OutputMessage" />
@@ -335,10 +339,6 @@
     <wsdl:operation name="RebootPCs">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/RebootPCs" message="tns:IService1_RebootPCs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/RebootPCsResponse" message="tns:IService1_RebootPCs_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="DisconnectPCs">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DisconnectPCs" message="tns:IService1_DisconnectPCs_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DisconnectPCsResponse" message="tns:IService1_DisconnectPCs_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetClientDrives">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetClientDrives" message="tns:IService1_GetClientDrives_InputMessage" />
@@ -523,6 +523,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SendMessageToClients">
+      <soap12:operation soapAction="http://tempuri.org/IService1/SendMessageToClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetScreenShot">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetScreenShot" style="document" />
       <wsdl:input>
@@ -579,15 +588,6 @@
     </wsdl:operation>
     <wsdl:operation name="RebootPCs">
       <soap12:operation soapAction="http://tempuri.org/IService1/RebootPCs" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DisconnectPCs">
-      <soap12:operation soapAction="http://tempuri.org/IService1/DisconnectPCs" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

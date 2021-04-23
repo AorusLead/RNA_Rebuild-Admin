@@ -141,6 +141,19 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendMessageToClients">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PcName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="text" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendMessageToClientsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetScreenShot">
     <xs:complexType>
       <xs:sequence>
@@ -232,18 +245,6 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="DisconnectPCs">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="PC_Name" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DisconnectPCsResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="GetClientDrives">
     <xs:complexType>
       <xs:sequence>
@@ -254,7 +255,7 @@
   <xs:element name="GetClientDrivesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetClientDrivesResult" nillable="true" type="q8:ArrayOfstring" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetClientDrivesResult" nillable="true" type="q8:ArrayOfSuperDrive" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -376,7 +377,7 @@
   <xs:element name="GetDrivesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetDrivesResult" nillable="true" type="q14:ArrayOfstring" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/RNA_Rebuild" minOccurs="0" name="GetDrivesResult" nillable="true" type="q14:ArrayOfSuperDrive" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

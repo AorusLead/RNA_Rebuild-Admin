@@ -45,13 +45,14 @@ namespace RNA_Rebuild_Admin
 		private RegistryKey addition = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\RNA_Addition\\");
 		private RegistryKey reg = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
 		private Service1Client service = null;
-		private Dictionary<string, bool> Back = null;
+		private Dictionary<string, bool> Back = new Dictionary<string, bool>();
 		private Client ActiveClient = null;
 		private Thread Stream = null;
 		private DispatcherTimer ProcessWatchingTimer = new DispatcherTimer();
 		private DispatcherTimer ProtectionTimer = new DispatcherTimer();
 		public MainWindow()
 		{
+			if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Screenshots")) Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Screenshots");
 			InitializeComponent();
 		}
 
@@ -70,19 +71,30 @@ namespace RNA_Rebuild_Admin
 			}
 		}
 
-		private void CheckingRegex()
+		private void CheckingReg()
 		{
-			bool? value = reg.GetValue(ExePath) as bool?;
-			if (value != null) { startupitem.IsChecked = Convert.ToBoolean(value); MenuItem_Click_1(null, null); }
+			try 
+			{
+				bool value = reg.GetValue("RNA_Admin") != null;
+				if (value) { startupitem.IsChecked = Convert.ToBoolean(value); MenuItem_Click_1(null, null); }
 
-			 value = addition.GetValue("MailLogs") as bool?;
-			if (value != null) { sendmaillogsitem.IsChecked = Convert.ToBoolean(value); sendmaillogsitem_Click(null, null); }
-
-			value = addition.GetValue("TextLogs") as bool?;
-			if (value != null) { textlogsitem.IsChecked = Convert.ToBoolean(value); MenuItem_Click_2(null, null); }
-
-			value = addition.GetValue("SafeMode") as bool?;
-			if (value != null) { safemodeitem.IsChecked = Convert.ToBoolean(value); MenuItem_Click_3(null, null); }
+				{
+					value = false;
+					bool.TryParse(addition.GetValue("MailLogs")?.ToString(), out value);
+					if (value) { sendmaillogsitem.IsChecked = Convert.ToBoolean(value); sendmaillogsitem_Click(null, null); }
+				}
+				{
+					value = false;
+					bool.TryParse(addition.GetValue("TextLogs")?.ToString(), out value);
+					if (value) { textlogsitem.IsChecked = Convert.ToBoolean(value); MenuItem_Click_3(null, null); }
+				}
+				{
+					value = false;
+					bool.TryParse(addition.GetValue("SafeMode")?.ToString(), out value);
+					if (value) { safemodeitem.IsChecked = Convert.ToBoolean(value); MenuItem_Click_2(null, null);  }
+				}
+			}
+			catch (Exception ex) { MessageBox.Show(ex.Message); }
 		}
 
 		[Obsolete]
@@ -104,12 +116,11 @@ namespace RNA_Rebuild_Admin
 
 		private void SetTimers()
 		{
-
 			ProcessWatchingTimer.Tick += Timer_Tick;
 			ProtectionTimer.Tick += ProtectionTimer_Tick;
 
-			ProcessWatchingTimer.Interval = new TimeSpan(0, 0, 3);
-			ProtectionTimer.Interval = new TimeSpan(0, 5, 0);
+			ProcessWatchingTimer.Interval = new TimeSpan(0, 0, 4);
+			ProtectionTimer.Interval = new TimeSpan(0, 0, 5);
 		}
 
 		private void Loginning()
@@ -121,7 +132,9 @@ namespace RNA_Rebuild_Admin
 
 		private void ProtectionTimer_Tick(object sender, EventArgs e)
 		{
+			ProtectionTimer.Stop();
 			Loginning();
+			ProtectionTimer.Start();
 		}
 
 		private void Timer_Tick(object sender, EventArgs e)
@@ -198,6 +211,7 @@ namespace RNA_Rebuild_Admin
 		{
 			try
 			{
+				if ((bool)SelectAllCheckBox.IsChecked) SelectAllCheckBox.IsChecked = false;
 				service.DeleteUsingClientAsync(((CheckBox)sender).Content.ToString());
 			}
 			catch { }
@@ -214,25 +228,28 @@ namespace RNA_Rebuild_Admin
 
 		public void GetScreenshot(Client Client)
 		{
+			GoAnotherAdditionMode(AdditionType.Image);
 			Active.Content = Client.PcName;
-			string filename = AppDomain.CurrentDomain.BaseDirectory + "\\Screenshots\\screenshot_" + Client.PcName + "_" + DateTime.Now + ".png";
-			//await Task.Run(() => File.WriteAllBytes(filename, service.GetScreenShotAsync(Client.PcName).Result.Content.));
-			//BitmapImage bi = new BitmapImage(new Uri(filename, UriKind.RelativeOrAbsolute));
-			//await Task.Run(()=>ChangeStreamScreen(TryConvert(service.GetScreenShotAsync(Client.PcName).Result.Content)));
+			string filename = (AppDomain.CurrentDomain.BaseDirectory + "Screenshots\\screenshot_" + Client.PcName + "_" + Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + "Screenshots").Length + ".png");
+			SuperImage ScreenShot = service.GetScreenShotAsync(Client.PcName).Result;
+			File.WriteAllBytes(filename, ScreenShot.Content);
+			Dispatcher.Invoke(()=> Screen.Source = new BitmapImage(new Uri(filename, UriKind.RelativeOrAbsolute)));
 		}
 
 		private void GoAnotherAdditionMode(AdditionType Type)
         {
+			if (!Dispatcher.CheckAccess()) Dispatcher.Invoke(() => GoAnotherAdditionMode(Type));
+			else
 			switch (Type)
             {
 				case AdditionType.Files:
-					ProcessWatchingTimer.Stop();
+					ProcessWatchingTimer?.Stop();
 					ProcessList.Visibility = Visibility.Collapsed;
 					Screen.Visibility = Visibility.Collapsed;
 					FileBrowser.Visibility = Visibility.Visible;
 					break;
 				case AdditionType.Image:
-					ProcessWatchingTimer.Stop();
+					ProcessWatchingTimer?.Stop();
 					ProcessList.Visibility = Visibility.Collapsed;
 					Screen.Visibility = Visibility.Visible;
 					FileBrowser.Visibility = Visibility.Collapsed;
@@ -268,7 +285,7 @@ namespace RNA_Rebuild_Admin
 			{
 				try
 				{
-					SuperImage si = service.GetScreenShotAsync(ActiveClient.PcName).Result;
+					SuperImage si = service.GetScreenShotAsync(client.PcName).Result;
 
 					using (var ms = new System.IO.MemoryStream(si.Content))
 					{
@@ -340,37 +357,39 @@ namespace RNA_Rebuild_Admin
 		private void ShutDownClientPC(object sender, RoutedEventArgs e)
 		{
 			if (ClientsPCListBox.SelectedItem != null)
-				service.ShutdownPCsAsync(null);
+				service.ShutdownPCsAsync(ActiveClient.PcName);
 		}
 		private void RebootClientPC(object sender, RoutedEventArgs e)
 		{
 			if (ClientsPCListBox.SelectedItem != null)
-				service.RebootPCsAsync(null);
+				service.RebootPCsAsync(ActiveClient.PcName);
 		}
 		private void DisconnectClientPC(object sender, RoutedEventArgs e)
 		{
 			if (ClientsPCListBox.SelectedItem != null)
-				service.DisconnectClientAsync(null);
+				service.DisconnectClientAsync(ActiveClient.PcName);
 		}
 		private void OpenFileBrowser(object sender, RoutedEventArgs e)
 		{
 			if (ClientsPCListBox.SelectedItem != null)
 			{
-				ActiveClient = service.GetClientsAsync().Result[((CheckBox)ClientsPCListBox.SelectedItem).Content.ToString()];
-				Active.Content = ActiveClient.PcName; string[] drives = null;
+				GoAnotherAdditionMode(AdditionType.Files);
+				Active.Content = ActiveClient.PcName; 
+				SuperDrive[] drives = null;
 				try
 				{
 					drives = service.GetClientDrivesAsync(ActiveClient.PcName).Result;
+					foreach (var drive in drives)
+					{
+						TreeViewItem new_item = new TreeViewItem();
+						new_item.Tag = new_item.Header = drive.Name;
+						if (!drive.IsEmpty)
+							new_item.Items.Add(new TreeViewItem());
+						new_item.Expanded += New_item_Expanded;
+						FileBrowser.Items.Add(new_item);
+					}
 				}
 				catch (Exception ex) { MessageBox.Show(ex.Message); }
-				foreach (var drive in drives)
-				{
-					TreeViewItem new_item = new TreeViewItem();
-					new_item.Header = drive;
-					if (service.GetClientDirectories(ActiveClient.PcName, drive).Length > 0 || service.GetClientFiles(ActiveClient.PcName, drive).Length > 0)
-						new_item.Items.Add(new TreeViewItem());
-					FileBrowser.Items.Add(new_item);
-				}
 			}
 		}
 		private void New_item_Expanded(object sender, RoutedEventArgs e)
@@ -411,20 +430,25 @@ namespace RNA_Rebuild_Admin
 			ActiveClient = service.GetClientsAsync().Result[((CheckBox)ClientsPCListBox.SelectedItem).Content.ToString()];
 			Active.Content = ActiveClient.PcName;
 		}
-		private async void CheckBox_Checked(object sender, RoutedEventArgs e)
+		private void CheckBox_Checked(object sender, RoutedEventArgs e)
 		{
+			Back.Clear();
 			foreach (CheckBox box in ClientsPCListBox.Items)
 			{
-				await Task.Run(()=>Back.Add(box.Content.ToString(), (bool)box.IsChecked));
+				Back.Add(box.Content.ToString(), (bool)box.IsChecked);
 				if (box.IsChecked == false) box.IsChecked = true;
 			}
 		}
 
-		private async void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+		private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
 		{
 			foreach (CheckBox box in ClientsPCListBox.Items)
 				if (Back.ContainsKey(box.Content?.ToString()))
-					await Task.Run(() => box.IsChecked = Back[box.Content.ToString()]);
+				{
+					box.IsChecked = Back[box.Content.ToString()];
+					Back.Remove(box.Content.ToString());
+					if (Back.Count == 0) break;
+				}
 		}
 
 		public SuperImage GetScreenshot()
@@ -523,23 +547,44 @@ namespace RNA_Rebuild_Admin
 			catch { }
 		}
 
-        string[] IService1Callback.GetDrives()
+        SuperDrive[] IService1Callback.GetDrives()
         {
 			return null;
         }
 
         private void OpenProcesses(object sender, RoutedEventArgs e)
         {
+			new Thread(() => CallProcesses()).Start();
+		}
+
+		private async void CallProcesses()
+		{
+			await Task.Run(() => Dispatcher.Invoke(()=> GoAnotherAdditionMode(AdditionType.Process)));
+			var r = service.GetClientProcessesAsync(ActiveClient.PcName).Result;
+			await Task.Run(() => Dispatcher.Invoke(() => ProcessList.ItemsSource = r));
+			ProcessWatchingTimer.Stop();
 			ProcessWatchingTimer.Start();
-			GoAnotherAdditionMode(AdditionType.Process);
-			ProcessList.ItemsSource = service.GetClientProcessesAsync(ActiveClient.PcName).Result;
-			ProcessList.Columns[0].Visibility = Visibility.Collapsed;
 		}
 
 		private void MenuItem_Click_1(object sender, RoutedEventArgs e)
 		{
-			bool value = ((MenuItem)e.OriginalSource).IsChecked;
-			reg.SetValue(ExePath, value);
+			switch (startupitem.IsChecked)
+			{
+				case true:
+					try
+					{
+						reg.SetValue("RNA_Admin", ExePath);
+					}
+					catch { }
+					break;
+				case false:
+					try
+					{
+						reg.DeleteValue("RNA_Admin");
+					}
+					catch { }
+					break;
+			}
 		}
 
 		public string Str()
@@ -552,14 +597,14 @@ namespace RNA_Rebuild_Admin
 			Loginning();
 			ConnectingToService(); 
 			SetTimers();
-			CheckingRegex();
+			CheckingReg();
 			CheckingMail();
 			GettingUsers();
 		}
 
 		private void MenuItem_Click_2(object sender, RoutedEventArgs e)
 		{
-			bool value = ((MenuItem)e.OriginalSource).IsChecked;
+			bool value = safemodeitem.IsChecked;
 			addition.SetValue("SafeMode", value);
 			switch (value)
 			{
@@ -574,21 +619,88 @@ namespace RNA_Rebuild_Admin
 
 		private void sendmaillogsitem_Click(object sender, RoutedEventArgs e)
 		{
-			bool value = ((MenuItem)e.OriginalSource).IsChecked;
+			bool value = sendmaillogsitem.IsChecked;
 			addition.SetValue("MailLogs", value);
 			service.ChangeSMTPLoggingAsync(value);
 		}
 
 		private void MenuItem_Click_3(object sender, RoutedEventArgs e)
 		{
-			bool value = ((MenuItem)e.OriginalSource).IsChecked;
+			bool value = textlogsitem.IsChecked;
 			addition.SetValue("TextLogs", value);
 			service.ChangeTXTLoggingAsync(value);
 		}
 
 		public bool Ping()
 		{
-			throw new NotImplementedException();
+			return true;
+		}
+
+
+
+		private void Button_Click_1(object sender, RoutedEventArgs e)
+		{
+			MessageWritingWindow mwm = new MessageWritingWindow(true);
+			mwm.MessageSendingEvent += ServiceMessageSending;
+			mwm.ShowDialog();
+		}
+
+		private void ServiceMessageSending(string text, bool IsForAll)
+		{
+			if (!IsForAll) service.SendMessageToClientsAsync(ActiveClient.PcName, text);
+			else service.SendMessageToClientsAsync(null, text);
+		}
+
+		private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+		{
+			MessageWritingWindow mwm = new MessageWritingWindow(false);
+			mwm.MessageSendingEvent += ServiceMessageSending;
+			mwm.ShowDialog();
+		}
+
+		private async void ProcessList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			await Task.Run(() => ProcessWatchingTimer.Stop());
+			await Task.Run(() => ProcessWatchingTimer.Start());
+		}
+
+		private void Button_Click_2(object sender, RoutedEventArgs e)
+		{
+			service.RebootPCsAsync(null);
+		}
+
+		private void Button_Click_3(object sender, RoutedEventArgs e)
+		{
+			service.DisconnectClientAsync(null);
+		}
+
+		private void ProcessList_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+		{
+			ProcessWatchingTimer.Stop();
+		}
+
+		private void ProcessList_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+		{
+			ProcessWatchingTimer.Start();
+		}
+
+		private void ProcessList_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+		{
+			ProcessWatchingTimer.Stop();
+			ProcessWatchingTimer.Start();
+		}
+
+		private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				if (ProcessList.SelectedItem != null)
+				{
+					service.CloseClientProcessAsync(ActiveClient.PcName, (ProcessList.SelectedItem as SuperProcess).Id);
+					ProcessList.Items.Remove(ProcessList.SelectedItem);
+				}
+			}
+			catch { }
 		}
 	}
 }
